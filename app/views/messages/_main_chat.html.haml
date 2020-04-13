@@ -2,23 +2,24 @@
   .main__chat--header
     .left__box
       .current__group
-        test
+        = @group.name
       %ul.member__list
         %li.member__list--first
           member:
         %li.member__list--second
-          masa
+          -@group.users.each do |user|
+            %li= user.name
     = link_to "#", class: "edit-btn" do
       Edit
   .messages
-    .messages
-  = render @messages
+    = render @messages
+
   .form
-    = form_for [@group, @message] do |f|
-      = f.text_field :content, class: 'form__text', placeholder: 'type a message'
-    .input__box
-      = f.label :image, class: 'input__box__image' do
-        = icon('fas', 'image', class: 'icon')
-        = f.file_field :image, class: 'hidden'
-    = f.submit 'Send', class: 'submit__btn'
+    = form_for [@group, @message], html: {id: 'new_message'} do |f|
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+      .form__mask
+        = f.label :image, class: 'form__mask__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
           
