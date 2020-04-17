@@ -5,10 +5,10 @@
         = @group.name
       %ul.member__list
         %li.member__list--first
-          member:
+          member :
         %li.member__list--second
           -@group.users.each do |user|
-            %li= user.name
+            = user.name
     = link_to edit_group_path(@group), class: "edit-btn" do
       Edit
   .messages
